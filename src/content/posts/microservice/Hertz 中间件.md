@@ -6,7 +6,6 @@ image: ''
 tags: ['Microservice', 'Golang', 'Hertz']
 category: 'Microservice'
 draft: false 
-
 ---
 
 >   Hertz 的中间件设计与 Gin 几乎一样，如果有过编写 Gin middleware 的经历，那么可以直接跳过不看。
