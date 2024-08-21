@@ -3,10 +3,9 @@ title: Dive into LLM
 published: 2024-08-01 10:00:00
 description: ''
 image: ''
-tags: ['Microservice', 'Golang', 'Hertz']
-category: 'Microservice'
-draft: false 
-
+tags: ['LLM', 'AI']
+category: 'AI'
+draft: true 
 
 ---
 
