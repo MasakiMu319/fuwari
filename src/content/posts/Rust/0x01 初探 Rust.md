@@ -136,4 +136,13 @@ Rust 中通过 `Box<T>` 来指向存储在堆上的 T 类型值的指针，可�
 
 ## 借用与引用
 
+To be continued.
 
+## Trait
+
+`Trait` 直接类比其他语言类型中的 `interface` 之类即可。但是比较不同的地方在于，Trait `要求`必须满足以下条件之一：
+
+1.   `实现 Trait 的类型`在当前 crate 下定义；
+2.   `需要的实现的 Trait 在`当前 crate 下定义。
+
+这两个原则确保了：假设 `Trait::IsEvent` 在 `crate A` 中定义，但是 `crate B`、`crate C` 都为 `u32` 各自的 `Trait::IsEvent`。但 `crate D` 需要依赖 B、C，当 D 需要调用 u32 中实现的 `IsEvent` 方法时，编译器无法知道 D 要调用 B 还是 C 中定义的方法。
