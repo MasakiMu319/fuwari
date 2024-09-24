@@ -5,7 +5,7 @@ description: '深入探索 Cargo 使用'
 image: ''
 tags: ['Rust', 'Basic skills']
 category: 'Rust'
-draft: false
+draft: true
 ---
 
 >   在 Rust 中，Crate 被翻译成包，因此 package 可以认为是工程、软件包。
