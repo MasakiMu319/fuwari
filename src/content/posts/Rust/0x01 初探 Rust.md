@@ -191,6 +191,46 @@ fn main() {
 
 这里比较难以理解的是，我们在将实际的字符串赋给 a 的时候添加了额外的 `‘static` 信息，因为此时的 str 并不是分配在堆上的，而是在全局内存中（即为整个程序的生命周期），因为类型推断的存在，所以如果不显式使用 static，程序一样可以正常编译。
 
+:::tip
+
+这里深究一下，`‘static` 静态生命周期来自特殊的静态内存区域，它来自程序编译后的文件中的几个密切相关的区域，当程序执行时，这些区域会自动加载到程序的内存中，静态存储器中的值在整个程序的执行过程中有效，用于存储使用 `static` 声明的变量，以及代码中的某些常量值，如字符串。
+
+例如上面的代码在编译后生成的汇编代码为：
+
+```assembly
+// .L__unnamed_12 标签就是编译器自动生成的，用于标识一个字符串字面量 "Hello, World" 在程序数据段中的位置
+.L__unnamed_12:
+	.ascii	"Hello, World"
+
+// 省略其他编码
+
+playground::main:
+	subq	$216, %rsp
+	// leaq: 这是一条 "load effective address" 指令,它将一个地址加载到目标寄存器中,而不是将该地址指向的值加载到寄存器中。
+	// 将字符串 "Hello, World" 所在的内存地址加载到 %rsi 寄存器中
+	leaq	.L__unnamed_12(%rip), %rsi
+	movq	%rsi, 24(%rsp)
+	movq	$12, 32(%rsp)
+	leaq	40(%rsp), %rdi
+	movq	%rdi, 8(%rsp)
+	movl	$12, %edx
+	callq	<str as alloc::string::ToString>::to_string
+	movq	8(%rsp), %rdi
+	callq	alloc::string::String::capacity
+	movq	%rax, 16(%rsp)
+	jmp	.LBB31_3
+	
+// 省略其他编码
+```
+
+:::
+
+:::warning
+
+带有 static 标识的变量不一定指向静态内存，但是唯一能确定的事情是，无论它指向什么，对于程序其他部分来说它都可以在程序运行期间使用。
+
+:::
+
 由此我们可以判定，String 其实是对 str 的类型的包装，因此具备 capacity 参数。
 
 ## Trait
