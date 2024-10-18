@@ -5,7 +5,7 @@ description: '对 TEI 的魔改与 Rust 在 ML 相关的支持探索'
 image: ''
 tags: ['Rust', 'ONNX', 'Embedding']
 category: 'Rust'
-draft: true
+draft: false
 ---
 
 *（动笔之前发现距离自己第一次写有关 Rust 的 Blog 正好两个月了，这也是自己总共学习 Rust 的时间，感慨良多）*。
