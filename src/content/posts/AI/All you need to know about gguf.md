@@ -11,7 +11,7 @@ draft: false
 
 :::warning
 
-文中所列出的 GGUF 元数据部分内容截止到 24/11/06，如发现某些 model 有新增元数据信息，请以模型发布方说明为准，或者参考：[gguf/constants.py](https://github.com/ggerganov/llama.cpp/blob/master/gguf-py/gguf/constants.py).
+文中所列出的 GGUF 元数据部分内容截止到 24/11/06，如发现某些 model 有新增元数据信息，请以模型发布方说明为准，或者参考：[gguf/constants.py](https://github.com/ggerganov/llama.cpp/blob/master/gguf-py/gguf/constants.py), .
 
 :::
 
@@ -124,23 +124,41 @@ GGUF （GGUF v3）文件结构如下。使用在 general.alignment 字段中指�
 #### General metadata
 
 -   `general.name: string` ：模型的名称。这应该是一个人类可读的名称，可用于标识模型。它应该在定义模型的社区内是唯一的。
+
 -   `general.author: string` ：模型的作者。
+
 -   `general.version: string` ：模型的版本。
+
 -   `general.organization: string` ：模型的组织。
+
 -   `general.basename: string` ：模型的基本模型名称/架构。
+
 -   `general.finetune: string` ：基础模型针对什么进行了优化。
+
 -   `general.description: string` ：模型的自由格式描述，包括其他字段未涵盖的任何内容。
+
 -   `general.quantized_by: string` ：对模型进行量化的个人的名称。
+
 -   `general.size_label: string` ：模型的大小类别，例如权重和专家的数量。
+
 -   `general.license.*` ：模型的许可证等信息，以 SPDX 许可证表达式表示（例如 `"MIT OR Apache-2.0` ）。不要包含任何其他信息，例如许可证文本或许可证的 URL。
+
 -   `general.url: string` ：模型主页的 URL。这可以是 GitHub 仓库、论文等。
+
 -   `general.doi: string` : 数字对象标识符 (DOI) https://www.doi.org/。
+
 -   `general.uuid: string` ：通用唯一标识符。
+
 -   `general.repo_url: string` ：模型存储库的 URL，例如 GitHub 存储库或 HuggingFace 存储库。
+
 -   `general.tags: string[]` ：可作为搜索引擎或社交媒体搜索词的标签列表。
+
 -   `general.languages: string[]` ：模型支持的语言。编码为 ISO 639 两个字母代码。
+
 -   `general.datasets: string[]` ：模型训练所依据的数据集的链接或引用。
+
 -   `general.file_type: uint32` ：描述文件中大多数张量类型的枚举值。可选；可以从张量类型推断。
+
     -   `ALL_F32 = 0`
     -   `MOSTLY_F16 = 1`
     -   `MOSTLY_Q4_0 = 2`
@@ -160,6 +178,12 @@ GGUF （GGUF v3）文件结构如下。使用在 general.alignment 字段中指�
     -   `MOSTLY_Q5_K_S = 16`
     -   `MOSTLY_Q5_K_M = 17`
     -   `MOSTLY_Q6_K = 18`
+
+    :::note
+    
+    [Quantization Types](https://huggingface.co/docs/hub/gguf#quantization-types)
+    
+    :::
 
 #### Source metadata
 
@@ -196,3 +220,7 @@ GGUF （GGUF v3）文件结构如下。使用在 general.alignment 字段中指�
 -   `[llm].attention.value_length: uint32` ：值头部的可选大小。如果未指定，则为 `n_embd / n_head` 。
 
 其余键值通常不会关注/较少关注，不再一一列出。
+
+## GGUF 转换
+
+1.   hugging face space：https://huggingface.co/spaces/ggml-org/gguf-my-repo；
