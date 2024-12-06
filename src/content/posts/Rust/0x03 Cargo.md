@@ -32,7 +32,59 @@ use 关键字：用于将某个模块中的类型或函数引入当前作用域�
 
 当你在 lib.rs 中声明模块后，main.rs 可以直接使用这些模块，而不需要在 main.rs 中再次声明 mod。这样可以使 main.rs 更加简洁，只关注程序的入口逻辑。
 
+## 基础
 
+-   cargo new {project} --bin --vcs none：创建一个 binary 或者 lib 类型的项目，并不会自动进行 git 初始化；
+-   cargo build：默认采用 --debug 模式进行编译目标项目；
+-   cargo run：默认在采用 --debug 模式编译后并自动运行；
+-   cargo build --release：使用 --release 模式编译目标项目，rustc 会对代码自动进行性能优化。
 
+当你从 remote 拉取一个新项目后，执行 cargo build 即可自动拉取相应的依赖并构建。
 
+cargo 通过 Cargo.toml 配置文件管理依赖及其相关的版本（可以类比 Python 中的 pyproject.toml ），同时在编译的时候会自动生成一个 Cargo.lock 文件（可以类比使用 uv 作为Python 包管理工具产生的 uv.lock），其中包含了项目所使用依赖的更详细信息。
+
+如果需要更新依赖的版本，需执行 cargo update，否则会使用 Cargo.toml 中声明的版本。
+
+### Cargo项目目录惯例
+
+```
+.
+├── Cargo.lock
+├── Cargo.toml
+├── src/
+│   ├── lib.rs
+│   ├── main.rs
+│   └── bin/
+│       ├── named-executable.rs
+│       ├── another-executable.rs
+│       └── multi-file-executable/
+│           ├── main.rs
+│           └── some_module.rs
+├── benches/
+│   ├── large-input.rs
+│   └── multi-file-bench/
+│       ├── main.rs
+│       └── bench_module.rs
+├── examples/
+│   ├── simple.rs
+│   └── multi-file-example/
+│       ├── main.rs
+│       └── ex_module.rs
+└── tests/
+    ├── some-integration-tests.rs
+    └── multi-file-test/
+        ├── main.rs
+        └── test_module.rs
+```
+
+-   `Cargo.toml`, `Cargo.lock` 存储在包的根目录;
+-   项目源文件在 `src` 目录中;
+-   默认的库文件是 `src/lib.rs`;
+-   默认的可执行文件是 `src/main.rs`;
+    -   其他可执行的文件在 `src/bin/`;
+-   Benchmarks 在 benches 目录中；
+-   示例在 examples 目录中；
+-   集成测试在 tests 目录中；
+
+如果 binary，example，bench 或者集成测试包含了多个源文件，可以放在相应子目录下并添加 main.rs 文件，可执行文件的名称与文件夹名称保持一致。
 
