@@ -1,11 +1,12 @@
 ---
-title: Is deliberate, careful thinking the most effective method for enhancing LLMs?
+title: Is careful thinking the most effective method for enhancing LLMs?
 published: 2024-11-10 11:30:00
 description: 'Some interesting research findings about CoT.'
 image: ''
 tags: ['CoT', 'LLM']
 category: 'LLM'
 draft: false
+
 ---
 
 CoT 是大模型提示工程开始兴起后不久即提出的概念，核心魔法🧙‍♀️浓缩成一句话就是“Let’s think step by step”.对其合理的解释是，通过让 LLMs 更多地输出与任务相关的内容以提升“next token”预测结果的准确性。近期 o1-preview 所提出的 slow think 也被视为是 CoT 的工程化实现代表，于是开始有人声称 CoT 展示了 LLMs 的无限推理能力，极有可能使得我们进一步实现 AGI。
@@ -104,6 +105,6 @@ CoT 是大模型提示工程开始兴起后不久即提出的概念，核心魔�
 笔者从测试数据中观察到比较奇怪的有两点，在特征聚合决策测试中：
 
 1.    OpenAI 和 Llama 的模型存在性能下降，但是 Claude 的表现比较一致，有明显提升效果；
-2.   就 Anthropic 披露的模型数据来说， Opus 规格应明显优于 Sonnet，但是在该任务中 Sonnet 却明显优于 Opus；
+2.    就 Anthropic 披露的模型数据来说， Opus 规格应明显优于 Sonnet，但是在该任务中 Sonnet 却明显优于 Opus；
 
 此外，推理方面的任务，我个人猜测 CoT 提示词设计不合理应当会严重影响最终呈现的效果，需要谨慎看待 CoT 效果下降的效果参考。
